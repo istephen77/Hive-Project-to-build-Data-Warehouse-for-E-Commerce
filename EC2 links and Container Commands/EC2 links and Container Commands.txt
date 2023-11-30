@@ -1,0 +1,81 @@
+
+# START YOUR AWS INSTANCE
+## Replace IP with your Instance IP
+
+ssh -i "hive_docker_setup.pem" ec2-user@ec2-13-233-126-77.ap-south-1.compute.amazonaws.com
+sudo systemctl start docker
+cd docker_exp
+docker-compose up
+
+# Open new terminal
+ssh -i "hive_docker_setup.pem" ec2-user@ec2-13-233-126-77.ap-south-1.compute.amazonaws.com -o "ServerAliveInterval 30" -L 2081:localhost:2041 -L 4888:localhost:4888 -L 4889:localhost:4889 -L 2080:localhost:2080 -L 8050:localhost:8050 -L 8051:localhost:8051 -L 4141:localhost:4141 -L 4090:localhost:4090 -L 3180:localhost:3180 -L 50075:localhost:50075 -L 50070:localhost:50070 -L 50010:localhost:50010 -L 3077:localhost:3077 -L 4080:localhost:4080 -L 9870:localhost:9870 -L 8188:localhost:8188 -L 9864:localhost:9864 -L 8042:localhost:8042 -L 8088:localhost:8088 -L 8080:localhost:8080 -L 8081:localhost:8081 -L 10000:localhost:10000 -L 6080:localhost:6080 -L 8998:localhost:8998 -L 3306:localhost:3306
+
+# to get in to Containers
+docker exec -i -t ra_mysql bash
+docker exec -i -t ra_sqoop bash
+docker exec -i -t ra_hive-server bash
+docker exec -i -t hdp_spark-master bash
+
+# to get in to Mysql prompt
+mysql -u root -p
+example
+
+# To shutdown and exit
+cd docker_exp
+docker-compose stop
+cd ..
+sudo systemctl stop docker
+
+# STOP YOUR AWS INSTANCE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+scp -r -i "hive_docker_setup.pem" TaxiLocator ec2-user@ec2-13-127-177-162.ap-south-1.compute.amazonaws.com:/home/ec2-user/TaxiLocator
+sudo chmod -R 755 TaxiLocator
+
+docker run --name my-redis -p 6379:6379 -d redis
+cp redis-3.2.6/ /opt/
+
+sudo chmod -R 755 redis-3.2.6
+
+redis-3.2.6/src/redis-server redis-3.2.6/redis.conf
+
+
+
+docker exec -i -t docker_exp_redis_1 bash
+
