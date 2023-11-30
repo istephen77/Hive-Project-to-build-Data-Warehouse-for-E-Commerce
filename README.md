@@ -4,11 +4,20 @@ The Hive Project, dedicated to constructing a Data Warehouse tailored for E-Comm
 Approach :
 
 • Create an AWS EC2 Instance and launch it.
+
 • Create docker images using the docker-compose file on the EC2 machine.
+
 • Create the tables in MYSQL Relational Database Management System.
+
 • Load the data from the MYSQL into the HDFS storage by using the SQOOP command.
+
 • Move the data from HDFS to Hive.
+
 • Extract the customer information from the data by using the Scala code and store it as a Parquet file.
+
 • Move the Parquet file from the Spark to Hive.
+
 • Create tables in Hive and load the data from Parquet files into tables.
+
 • Perform the Hive Analytics on the Sales and Customer Data.
+
