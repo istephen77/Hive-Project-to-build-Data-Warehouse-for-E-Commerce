@@ -1,0 +1,78 @@
+-- To find the discount ranges for a product id
+select productid,discountpct,  minimum, maximum from (select productid, discountpct, min(unitprice) minimum, max(unitprice) maximum
+from sales_order_details sod join sales_order_header soh on sod.salesorderid = soh.salesorderid
+group by productid, discountpct) v
+where minimum <> maximum
+order by 1
+
+-- To get the products thats has offered maximum discount of 0.02
+select distinct productid, discountpct from sales_order_details sod join sales_order_header soh 
+on sod.salesorderid = soh.salesorderid
+where discountpct = "0.02"
+order by productid ;
+
+-- Sales contribution by customer and discounts offered
+select soh.CustomerID , sum(soh.SubTotal) subtotal,
+sum(soh.TaxAmt) Taxamt,sum(soh.Freight) Freight,
+sum(sod.DiscountPct) discountpercent,sum(soh.TotalDue) Totaldue
+from sales_order_details sod join sales_order_header soh on sod.salesorderid = soh.salesorderid
+group by soh.CustomerID 
+order by Totaldue desc;
+
+-- Understanding customer purchasing pattern
+select yearlyincome, sum(totalpurchaseytd) sales_value from customer_demo
+group by yearlyincome order by sales_value;
+
+select grouping__id, yearlyincome, education, gender, sum(totalpurchaseytd) sales_value from customer_demo
+group by yearlyincome, education,gender
+with rollup 
+order by sales_value desc;
+
+-- OR the above statement can be re written as
+
+select grouping__id, yearlyincome, education, gender,sum(totalpurchaseytd) sales_value from customer_demo
+group by yearlyincome, education,gender
+grouping sets ((yearlyincome, education,gender), (yearlyincome, education), (yearlyincome), ())
+order by sales_value desc;
+
+-- To find the sales contribution by customers on the overall year to date sales 
+-- belong to categorised by same gender, yearly income.
+
+select customerid, (sum(totalpurchaseytd) over (partition by customerid) / sum(totalpurchaseytd) over ()) percentage from customer_demo cd
+order by percentage desc;
+
+select  gender, yearlyincome,
+sum(v.percentage) as percentage_of_purchase from customer_demo cd
+join 
+(select customerid, (sum(totalpurchaseytd) over (partition by customerid) / sum(totalpurchaseytd) over ()) percentage from customer_demo cd) as v
+on v.customerid = cd.customerid
+group by gender, yearlyincome
+order by percentage_of_purchase desc;
+
+-- Sales contribution by territory
+select TerritoryID,sum(SalesYTD) t_sales from store_details 
+group by TerritoryID order by t_sales desc;
+
+(select TerritoryID,sum(soh.TotalDue) from sales_order_header soh
+join store_details store
+on store.TerritoryID = soh.TerritoryID
+group by soh.TerritoryID ) total
+
+-- To find the territory wise sales and adherence to their defined sales quota.
+
+select TerritoryID, sum(SalesYTD) , sum(SalesQuota) from store_details where TerritoryID ="1" group by TerritoryID ; 
+
+select distinct TerritoryID, (sum(SalesYTD) over (partition by TerritoryID) / sum(SalesQuota) over (partition by TerritoryID)) targets_acheived from store_details st
+order by targets_acheived desc;
+
+-- To find the territory wise sales from sales orders generated and adherence to their defined sales quota for that territory.
+select territory,sum(soh.TotalDue), sum(stores.targets_acheived) as target_completed from soh
+ join
+(select TerritoryID, (sum(SalesYTD) over (partition by TerritoryID) / sum(SalesQuota) over ()) targets_acheived from store_details st) as stores
+on stores.TerritoryID = soh.TerritoryID
+group by territory;
+
+
+
+
+
