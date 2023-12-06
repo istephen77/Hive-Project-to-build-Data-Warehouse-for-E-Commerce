@@ -16,10 +16,10 @@ create table customer_demographics (
 )
 stored as parquet;
 
-load data local inpath 'part-00000-5fdb1d9a-f42c-45ac-873c-a0eea98379a7-c000.snappy.parquet' overwrite into table customer_demographics;
-load data local inpath 'part-00001-5fdb1d9a-f42c-45ac-873c-a0eea98379a7-c000.snappy.parquet' into table customer_demographics;
-load data local inpath 'part-00002-5fdb1d9a-f42c-45ac-873c-a0eea98379a7-c000.snappy.parquet' into table customer_demographics;
-load data local inpath 'part-00003-5fdb1d9a-f42c-45ac-873c-a0eea98379a7-c000.snappy.parquet' into table customer_demographics;
+load data local inpath 'part-00001-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet' overwrite into table customer_demographics;
+load data local inpath 'part-00003-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet' into table customer_demographics;
+load data local inpath 'part-00002-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet' into table customer_demographics;
+
 
 select * from customer_demographics;
 
@@ -53,3 +53,58 @@ from customer_demographics;
 
 drop table customer_demographics;
 
+
+create table customer_demographics (
+`CustomerID` int,
+`TotalPurchaseYTD` string,
+`DateFirstPurchase` string,
+`BirthDate` string,
+`MaritalStatus` string,
+`YearlyIncome` string,
+`Gender` string,
+`TotalChildren` string,
+`NumberChildrenAtHome` string,
+`Education` string,
+`Occupation` string,
+`HomeOwnerFlag` string,
+`NumberCarsOwned` string,
+`CommuteDistance` string
+)
+stored as parquet;
+
+case class StoreDetails(
+  storeid: Int,
+  AnnualSales: String,
+  AnnualRevenue: String,
+  BankName: String,
+  BusinessType: String,
+  YearOpened: String,
+  Speciality: String,
+  SquareFeet: String,
+  Brands: String,
+  Internet: String,
+  NumberEmployees: String,
+)
+
+
+create external table store_details_xml_processed (
+`storeid` int,
+`AnnualSales` string,
+`AnnualRevenue` string,
+`gender` string,
+`BankName` string,
+`BusinessType` string,
+`YearOpened` string,
+`Speciality` string,
+`SquareFeet` string,
+`Brands` String,
+`Internet` String,
+`NumberEmployees` String
+)
+stored as parquet;
+
+
+load data local inpath 'part-00000-29e9fcc2-3eec-4b75-b40e-d07d462aa660-c000.snappy.parquet' overwrite into table store_details_xml_processed;
+
+
+chmod 755 
