@@ -1,0 +1,55 @@
+
+# To Copy files from Spark Container to EC2 Directory - Data for Customer Demographics Table
+docker cp hdp_spark-master:/spark/customer_demographics_xml_mined/part-00001-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet /home/ec2-user/
+docker cp hdp_spark-master:/spark/customer_demographics_xml_mined/part-00003-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet /home/ec2-user/
+docker cp hdp_spark-master:/spark/customer_demographics_xml_mined/part-00002-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet /home/ec2-user/
+docker cp hdp_spark-master:/spark/customer_demographics_xml_mined/part-00000-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet /home/ec2-user/
+docker cp hdp_spark-master:/spark/customer_demographics_xml_mined/part-00003-20ad3c91-2aef-4203-98ef-c7b1ccfec278-c000.snappy.parquet /home/ec2-user/
+docker cp hdp_spark-master:/spark/customer_demographics_xml_mined/part-00002-20ad3c91-2aef-4203-98ef-c7b1ccfec278-c000.snappy.parquet /home/ec2-user/
+docker cp hdp_spark-master:/spark/customer_demographics_xml_mined/part-00001-20ad3c91-2aef-4203-98ef-c7b1ccfec278-c000.snappy.parquet /home/ec2-user/
+docker cp hdp_spark-master:/spark/customer_demographics_xml_mined/part-00000-20ad3c91-2aef-4203-98ef-c7b1ccfec278-c000.snappy.parquet /home/ec2-user/
+
+# To Copy files from Spark Container to EC2 Directory - Data for Store Details Table
+docker cp hdp_spark-master:/spark/store_details_xml_mined/part-00000-29e9fcc2-3eec-4b75-b40e-d07d462aa660-c000.snappy.parquet /home/ec2-user/
+
+
+# To Copy Files from EC2 directory to Hive - Data for Customer Demographics Table
+docker cp /home/ec2-user/part-00001-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet ra_hive-server:/opt
+docker cp /home/ec2-user/part-00003-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet ra_hive-server:/opt
+docker cp /home/ec2-user/part-00002-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet ra_hive-server:/opt
+docker cp /home/ec2-user/part-00001-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet ra_hive-server:/opt
+docker cp /home/ec2-user/part-00001-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet ra_hive-server:/opt
+docker cp /home/ec2-user/part-00001-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet ra_hive-server:/opt
+docker cp /home/ec2-user/part-00001-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet ra_hive-server:/opt
+docker cp /home/ec2-user/part-00001-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet ra_hive-server:/opt
+
+# To Copy Files from EC2 directory to Hive - Data for Store Details Table
+docker cp /home/ec2-user/part-00000-29e9fcc2-3eec-4b75-b40e-d07d462aa660-c000.snappy.parquet ra_hive-server:/opt
+
+
+#Grant File Permission
+chmod 755 part-00001-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet 
+chmod 755 part-00003-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet
+chmod 755 part-00002-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet
+
+
+chmod 755 part-00000-29e9fcc2-3eec-4b75-b40e-d07d462aa660-c000.snappy.parquet
+
+
+
+
+
+-rw-r--r--    1 root     root          5506 Dec  6 16:49 part-00003-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet
+-rw-r--r--    1 root     root          5457 Dec  6 16:49 part-00002-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet
+-rw-r--r--    1 root     root          5490 Dec  6 16:49 part-00001-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet
+-rw-r--r--    1 root     root          5491 Dec  6 16:49 part-00000-42918891-56bd-410d-b574-f898c7433902-c000.snappy.parquet
+-rw-r--r--    1 root     root          5506 Dec  6 17:26 part-00003-20ad3c91-2aef-4203-98ef-c7b1ccfec278-c000.snappy.parquet
+-rw-r--r--    1 root     root          5457 Dec  6 17:26 part-00002-20ad3c91-2aef-4203-98ef-c7b1ccfec278-c000.snappy.parquet
+-rw-r--r--    1 root     root          5490 Dec  6 17:26 part-00001-20ad3c91-2aef-4203-98ef-c7b1ccfec278-c000.snappy.parquet
+-rw-r--r--    1 root     root          5491 Dec  6 17:26 part-00000-20ad3c91-2aef-4203-98ef-c7b1ccfec278-c000.snappy.parquet
+
+
+
+
+-rw-r--r--    1 root     root          4926 Dec  6 18:02 part-00000-29e9fcc2-3eec-4b75-b40e-d07d462aa660-c000.snappy.parquet
+
