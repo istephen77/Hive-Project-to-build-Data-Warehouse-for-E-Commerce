@@ -21,3 +21,7 @@ Approach :
 
 • Perform the Hive Analytics on the Sales and Customer Data.
 
+![image](https://github.com/istephen77/Hive-Project-to-build-Data-Warehouse-for-E-Commerce/assets/99792369/21657401-79d0-4516-97fc-b416f1ad4c08)
+
+
+
